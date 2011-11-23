@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+
+define('BASE_DIR', __DIR__);
+
+require_once BASE_DIR . '/src/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+
+use Symfony\Component\ClassLoader\UniversalClassLoader;
+use Symfony\Component\Console\Application;
+
+use Wichtel\Command\WichtelManagerCommand;
+
+$loader = new UniversalClassLoader();
+
+// register classes with namespaces
+$loader->registerNamespaces(array(
+    'Symfony\Component'	=> BASE_DIR . '/src/vendor',
+    'Wichtel'			=> BASE_DIR . '/src',
+));
+
+// activate the autoloader
+$loader->register();
+
+$app = new Application();
+$app->add(new WichtelManagerCommand());
+$app->run();
