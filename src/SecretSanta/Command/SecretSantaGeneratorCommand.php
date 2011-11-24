@@ -1,13 +1,13 @@
 <?php
 
-namespace Wichtel\Command;
+namespace SecretSanta\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class WichtelGeneratorCommand extends WichtelCommand
+class SecretSantaGeneratorCommand extends SecretSantaCommand
 {
 
 	protected function configure()
@@ -15,44 +15,44 @@ class WichtelGeneratorCommand extends WichtelCommand
 		parent::configure();
 		$this
 			 ->setName('generator')
-			 ->setDescription('Generate the wichtels.')
+			 ->setDescription('Generate the Secret Santas.')
 		;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$this->readWichtelFile();
+		$this->readSecretSantaFile();
 
-		$this->showWichtels($output);
+		$this->showSecretSantas($output);
 
 		$dialog = $this->getHelperSet()->get('dialog');
-		if (!$dialog->askConfirmation($output, '<question>Do you want to generate the pairs of wichtels? [yes/no]</question> ', false))
+		if (!$dialog->askConfirmation($output, '<question>Do you want to generate the pairs of Secret Santas? [yes/no]</question> ', false))
 		{
 			return;
 		}
-		$wichtel_pairs = $this->getWichtelPairs($output);
+		$secretsanta_pairs = $this->getSecretSantaPairs($output);
 		$output->writeln('<info>Success!</info>');
-		if (!$dialog->askConfirmation($output, '<question>Do you want to view the wichtel pairs? [yes/no]</question> ', false))
+		if (!$dialog->askConfirmation($output, '<question>Do you want to view the Secret Santa pairs? [yes/no]</question> ', false))
 		{
 			return;
 		}
-		foreach ($wichtel_pairs as $pair)
+		foreach ($secretsanta_pairs as $pair)
 		{
 			$output->writeln(sprintf('%s <%s> has to buy something for %s <%s>', $pair[0]['name'], $pair[0]['email'], $pair[1]['name'], $pair[1]['email']));
 		}
 	}
 
-	protected function getWichtelPairs(OutputInterface $output, $count = 0)
+	protected function getSecretSantaPairs(OutputInterface $output, $count = 0)
 	{
-		$wichtels = $this->getWichtels();
-		$partners = $wichtels;
+		$secretsantas = $this->getSecretSantas();
+		$partners = $secretsantas;
 		shuffle($partners);
 
 		$pairs = array();
-		for ($i=0; $i < count($wichtels); $i++)
+		for ($i=0; $i < count($secretsantas); $i++)
 		{ 
 			$pairs[] = array(
-				$wichtels[$i],
+				$secretsantas[$i],
 				$partners[$i]
 			);
 		}
@@ -61,7 +61,7 @@ class WichtelGeneratorCommand extends WichtelCommand
 			if ($pair[0]['email'] === $pair[1]['email'])
 			{
 				$output->writeln(sprintf('<error>Try %d failed. Another one...</error>', $count));
-				return $this->getWichtelPairs($output, $count + 1);
+				return $this->getSecretSantaPairs($output, $count + 1);
 			}
 		}
 		return $pairs;
