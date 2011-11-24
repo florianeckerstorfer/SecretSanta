@@ -9,6 +9,7 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 use Symfony\Component\Console\Application;
 
 use Wichtel\Command\WichtelManagerCommand;
+use Wichtel\Command\WichtelGeneratorCommand;
 
 $loader = new UniversalClassLoader();
 
@@ -23,4 +24,5 @@ $loader->register();
 
 $app = new Application();
 $app->add(new WichtelManagerCommand());
+$app->add(new WichtelGeneratorCommand());
 $app->run();
