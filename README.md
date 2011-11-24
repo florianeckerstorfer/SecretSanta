@@ -1,6 +1,6 @@
 # Secret Santa
 
-by [Florian Eckerstorfer](http://florianeckerstorfer.com)
+by [Florian Eckerstorfer](http://florianeckerstorfer.com). A list my projects is available on [TRTJ](http://theroadtojoy.at).
 
 ## Installation
 
