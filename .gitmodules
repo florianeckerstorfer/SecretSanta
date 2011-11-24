@@ -4,3 +4,6 @@
 [submodule "src/vendor/Symfony/Component/ClassLoader"]
 	path = src/vendor/Symfony/Component/ClassLoader
 	url = https://github.com/symfony/ClassLoader
+[submodule "src/vendor/swiftmailer"]
+	path = src/vendor/swiftmailer
+	url = https://github.com/swiftmailer/swiftmailer

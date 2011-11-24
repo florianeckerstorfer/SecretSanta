@@ -7,6 +7,12 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @package    at.theroadtojoy.secretsanta
+ * @subpackage Command
+ * @author     Florian Eckerstorfer <f.eckerstorfer@gmail.com>
+ * @license    http://www.opensource.org/licenses/mit-license.php MIT License
+ */
 abstract class SecretSantaCommand extends Command
 {
 
@@ -77,6 +83,11 @@ abstract class SecretSantaCommand extends Command
 	protected function getSecretSantaFile()
 	{
 		return $this->secretsanta_file;
+	}
+
+	protected function clearSecretSantas()
+	{
+		$this->secretSantas = array();
 	}
 
 }

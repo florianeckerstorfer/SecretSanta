@@ -7,6 +7,12 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @package    at.theroadtojoy.secretsanta
+ * @subpackage Command
+ * @author     Florian Eckerstorfer <f.eckerstorfer@gmail.com>
+ * @license    http://www.opensource.org/licenses/mit-license.php MIT License
+ */
 class SecretSantaManagerCommand extends SecretSantaCommand
 {
 	
@@ -26,6 +32,16 @@ class SecretSantaManagerCommand extends SecretSantaCommand
 		$dialog = $this->getHelperSet()->get('dialog');
 
 		$this->showSecretSantas($output);
+
+		if ($dialog->askConfirmation($output, '<question>Do you want to delete all current Secret Santas? [yes/no]</question> ', false))
+		{
+			if ($dialog->askConfirmation($output, '<error>Do you really want to delete all current Secret Santas? [yes/no]</error> ', false))
+			{
+				$this->clearSecretSantas();
+				$output->writeln('<info>Deleted all current Secret Santas.</info>');
+			}
+		}
+
 		while ($dialog->askConfirmation($output, '<question>Do you want to add another Secret Santa? [yes/no]</question> ', false))
 		{
 			$name = $dialog->ask($output, 'Please enter the name of the Secret Santa: ', '');
