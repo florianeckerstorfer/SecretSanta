@@ -118,12 +118,15 @@ class SecretSantaGeneratorCommand extends SecretSantaCommand
 
 	protected function sendMail($name, $email, $subject, $body)
 	{
-		$transport = \Swift_MailTransport::newInstance();
+		$transport = \Swift_SmtpTransport::newInstance(SMTP_SERVER, 25)
+			->setUsername(SMTP_USERNAME)
+			->setPassword(SMTP_PASSWORD)
+		;
 		$mailer = \Swift_Mailer::newInstance($transport);
 
 		$message = \Swift_Message::newInstance()
 			->setSubject($subject)
-			->setFrom(array('f.eckerstorfer@gmail.com' => 'Florian Eckerstorfer'))
+			->setFrom(array(SENDER_ADDRESS => SENDER_NAME))
 			->setTo(array($email => $name))
 			->setBody($body)
 		;

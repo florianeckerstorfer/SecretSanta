@@ -1,0 +1,7 @@
+<?php
+
+define('SMTP_SERVER',		'');
+define('SMTP_USERNAME', 	'');
+define('SMTP_PASSWORD', 	'');
+define('SENDER_ADDRESS',	'');
+define('SENDER_NAME',		'');

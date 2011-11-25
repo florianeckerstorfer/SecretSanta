@@ -1,3 +1,4 @@
 data/*
+config/config.php
 *.sublime-project
 *.sublime-workspace
